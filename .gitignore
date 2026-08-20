@@ -1,0 +1,11 @@
+.gradle/
+.gradle-bootstrap/
+.gradle-run/
+.gradle-user-home/
+.gradle-dist.zip
+build/
+run/
+*.iml
+.idea/
+*.log
+server-test/
