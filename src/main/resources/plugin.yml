@@ -1,0 +1,39 @@
+name: DuskContracts
+version: '${version}'
+main: dev.isylxnt.duskcontracts.bootstrap.DuskContractsPlugin
+api-version: '1.20'
+folia-supported: true
+author: isylxnt
+description: Safe item-delivery and player-assassination contracts.
+softdepend: [Vault, PlaceholderAPI]
+libraries:
+  - com.zaxxer:HikariCP:${hikariVersion}
+  - org.xerial:sqlite-jdbc:${sqliteVersion}
+  - com.mysql:mysql-connector-j:${mysqlVersion}
+  - org.mariadb.jdbc:mariadb-java-client:${mariadbVersion}
+commands:
+  contracts:
+    description: Open and manage delivery and assassination contracts.
+    usage: /contracts [help|browse|create|mine|active|claim|cancel|info|admin]
+    aliases: [contract, dcontracts]
+    permission: duskcontracts.use
+permissions:
+  duskcontracts.use: {default: true}
+  duskcontracts.browse: {default: true}
+  duskcontracts.create: {default: true}
+  duskcontracts.deliver: {default: true}
+  duskcontracts.assassination.create: {default: true}
+  duskcontracts.assassination.bypass-farming: {default: op}
+  duskcontracts.claim: {default: true}
+  duskcontracts.cancel.own: {default: true}
+  duskcontracts.private.create: {default: true}
+  duskcontracts.notifications: {default: true}
+  duskcontracts.bypass.cooldown: {default: op}
+  duskcontracts.bypass.limits: {default: op}
+  duskcontracts.fulfill.own: {default: op}
+  duskcontracts.admin: {default: op, children: {duskcontracts.admin.reload: true, duskcontracts.admin.inspect: true, duskcontracts.admin.cancel: true, duskcontracts.admin.recovery: true, duskcontracts.admin.stats: true}}
+  duskcontracts.admin.reload: {default: op}
+  duskcontracts.admin.inspect: {default: op}
+  duskcontracts.admin.cancel: {default: op}
+  duskcontracts.admin.recovery: {default: op}
+  duskcontracts.admin.stats: {default: op}

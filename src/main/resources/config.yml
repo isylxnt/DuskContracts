@@ -1,0 +1,73 @@
+schema-version: 1
+
+# Language used for messages and menu overrides. Bundled options: en and es.
+locale: en
+
+# Time values accept s (seconds), m (minutes), h (hours), and d (days).
+# Examples: 30s, 15m, 6h, 3d.
+contracts:
+  # Maximum number of open contracts one player may own at the same time.
+  max-active-per-player: 5
+  # Delay before the same player may create another contract.
+  creation-cooldown: 30s
+  # New contracts start with this duration. It should also appear below.
+  default-duration: 1d
+  # These choices are shown as clocks in the duration menu.
+  allowed-durations: [1h, 6h, 12h, 1d, 3d, 7d]
+  # Highest item quantity a delivery contract may request.
+  max-request-amount: 1000000
+  # Private contracts are visible only to their creator and selected player.
+  allow-private-contracts: true
+  # If false, creators cannot complete their own contracts unless they have the bypass permission.
+  allow-own-fulfillment: false
+
+matching:
+  # MATERIAL checks only the item type. SIMILAR checks normal metadata.
+  # EXACT compares all stable serialized item data.
+  default-mode: SIMILAR
+  # Remove a mode here if players should not be able to select it.
+  enabled-modes: [MATERIAL, SIMILAR, EXACT]
+
+partial-fulfillment:
+  # When enabled, money contracts may be completed by several deliveries.
+  enabled: true
+  # Smallest accepted partial delivery. The final remaining amount is always allowed.
+  minimum-contribution: 1
+
+money:
+  # Money rewards also require Vault and a working economy plugin.
+  enabled: true
+  # Number of decimal places stored by DuskContracts. Use 2 for values such as 10.50.
+  decimal-places: 2
+  minimum-reward: '1.00'
+  maximum-reward: '1000000000.00'
+  # Reserved for a future release. Keep these at zero; they are not charged in version 1.0.
+  creation-fee: {type: FLAT, amount: '0.00'}
+  tax-percent: 0.0
+
+expiration:
+  # How often the plugin checks for expired contracts. Lower values react faster but query more often.
+  sweep-interval: 30s
+  # Maximum number of expired contracts handled in one pass.
+  process-batch-size: 100
+
+security:
+  # Maximum serialized size of one item. Increase this only if trusted custom items need more space.
+  max-serialized-item-bytes: 1048576
+  # Unfinished operations older than this are quarantined for safe review after a restart.
+  operation-timeout: 30s
+  # Creation menus close after this much inactivity and return any deposited items.
+  session-timeout: 2m
+  # Maximum protected menu actions accepted from one player per second.
+  max-actions-per-second: 5
+
+assassination:
+  # Stops the same killer and target from repeatedly farming newly created bounties.
+  # Operators with duskcontracts.assassination.bypass-farming ignore this delay.
+  repeat-kill-cooldown: 15m
+
+logging:
+  # Audit entries older than this are removed in small daily batches.
+  audit-retention-days: 365
+  # Prints the platform, storage, economy, and schema summary after startup.
+  verbose-startup-report: true

@@ -1,0 +1,38 @@
+schema-version: 1
+
+# Available types: SQLITE, MYSQL, and MARIADB.
+# SQLite is the simplest choice for one server. MySQL or MariaDB is better when
+# the database must run on another machine. Storage changes require a restart.
+type: SQLITE
+
+sqlite:
+  # Relative paths are created inside plugins/DuskContracts/.
+  file: contracts.db
+
+# Only the section selected by "type" is used.
+mysql:
+  host: localhost
+  port: 3306
+  database: duskcontracts
+  username: duskcontracts
+  # Replace this value before selecting MYSQL. The password is never printed to logs.
+  password: change-me
+  # TLS modes: DISABLED, PREFERRED, REQUIRED, or VERIFY_IDENTITY.
+  # Use VERIFY_IDENTITY when the database has a trusted production certificate.
+  tls-mode: PREFERRED
+
+mariadb:
+  host: localhost
+  port: 3306
+  database: duskcontracts
+  username: duskcontracts
+  password: change-me
+  tls-mode: PREFERRED
+
+pool:
+  # Maximum simultaneous database connections. SQLite always uses one.
+  maximum-size: 10
+  # Milliseconds to wait for a connection before reporting a temporary failure.
+  connection-timeout-ms: 10000
+  # Milliseconds allowed for the connection health check.
+  validation-timeout-ms: 3000

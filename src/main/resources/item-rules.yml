@@ -1,0 +1,28 @@
+schema-version: 1
+
+# Global rules apply to requested, delivered, and reward items.
+# Material names must use Bukkit names such as DIAMOND_SWORD or SHULKER_BOX.
+blocked-materials: [AIR, BEDROCK, BARRIER, COMMAND_BLOCK, CHAIN_COMMAND_BLOCK, REPEATING_COMMAND_BLOCK, STRUCTURE_BLOCK, JIGSAW]
+
+# Leave this empty to allow every material that is not blocked.
+# If the list contains values, it becomes a strict allowlist.
+allowed-materials: []
+
+containers:
+  # Set blocked to true to reject every container item, including shulker boxes.
+  blocked: false
+  # Maximum number of containers nested inside other containers.
+  maximum-depth: 4
+
+# Blocks custom item data owned by a plugin namespace, for example: [myplugin, customitems].
+blocked-pdc-namespaces: []
+
+# Global serialized size limit per item. 1048576 bytes equals 1 MiB.
+maximum-serialized-bytes: 1048576
+
+# Context rules add extra restrictions for each use of an item.
+# An empty allowed-materials list inherits the global selection instead of blocking everything.
+contexts:
+  requested: {allow-containers: true, blocked-materials: [], allowed-materials: [], blocked-pdc-namespaces: [], maximum-serialized-bytes: 1048576}
+  delivered: {allow-containers: true, blocked-materials: [], allowed-materials: [], blocked-pdc-namespaces: [], maximum-serialized-bytes: 1048576}
+  reward: {allow-containers: true, blocked-materials: [], allowed-materials: [], blocked-pdc-namespaces: [], maximum-serialized-bytes: 1048576}

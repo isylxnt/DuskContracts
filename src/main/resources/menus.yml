@@ -1,0 +1,298 @@
+schema-version: 1
+
+# Menu sizes must be a multiple of 9 from 18 through 54.
+# Slots start at 0: the first slot is 0, the last slot of a 27-slot menu is 26.
+# Names, lore, and titles use MiniMessage tags such as <green>, <gray>, and <bold>.
+# Keep placeholders such as {contract_id} and {reward}; the plugin replaces them at runtime.
+
+# Main menu shown by /contract. The empty slots are intentional and match the compact chest layout.
+hub:
+  title: '<dark_gray>Dusk Contracts'
+  size: 27
+  library: {slot: 10, material: BOOKSHELF, custom-model-data: 0, name: '<gold>Public listings', lore: ['<gray>Browse public rewards', '<gray>that you can participate in.', '', '<yellow>Click to open the library']}
+  book: {slot: 13, material: BOOK, custom-model-data: 0, name: '<yellow>Your listings', lore: ['<gray>See listings you created', '<gray>or participated in.', '', '<yellow>Click to open your book']}
+  create: {slot: 16, material: EMERALD, custom-model-data: 0, name: '<green>Create a reward', lore: ['<gray>Publish a new request', '<gray>and fund its reward.', '', '<yellow>Click to start']}
+  claims: {slot: 22, material: CHEST, custom-model-data: 0, name: '<aqua>Claims', lore: ['<gray>Collect pending money', '<gray>and item rewards.', '', '<yellow>Click to open your claims']}
+
+# Personal navigation menu represented by the center book in the hub.
+book:
+  title: '<dark_gray>Book'
+  size: 27
+  contributions: {slot: 11, material: WRITTEN_BOOK, hide-item-specifics: true, name: '<light_purple>Active', lore: ['<gray>Listings you started and', '<gray>still need to complete.', '', '<yellow>Click to view']}
+  mine: {slot: 15, material: KNOWLEDGE_BOOK, name: '<green>Created', lore: ['<gray>All listings that', '<gray>you have published.', '', '<yellow>Click to view']}
+  back: {slot: 18, material: BARRIER, name: '<red>Back', lore: ['<gray>Return to the main menu.']}
+
+creation-type:
+  title: '<dark_gray>Contract type'
+  size: 27
+  assassination: {slot: 12, material: DIAMOND_SWORD, name: '<red>Assassination', lore: ['<gray>Place a bounty on a player.', '<gray>The killer receives the reward.', '', '<yellow>Click to create']}
+  delivery: {slot: 14, material: GRASS_BLOCK, name: '<green>Item delivery', lore: ['<gray>Request a material and amount', '<gray>from another player.', '', '<yellow>Click to create']}
+  cancel: {slot: 18, material: BARRIER, name: '<red>Cancel', lore: ['<gray>Return to the previous menu.']}
+
+creation-assassination:
+  title: '<dark_gray>Assassination contract'
+  size: 27
+  target: {slot: 11, material: PLAYER_HEAD, name: '<red>Target: <white>{target}', lore: ['<gray>The player who must be killed.', '', '<yellow>Click and type their nickname']}
+  duration: {slot: 13, material: CLOCK, name: '<yellow>Time: <white>{duration}', lore: ['<gray>Choose how long the bounty lasts.', '', '<yellow>Click to select']}
+  reward: {slot: 15, material: EMERALD, name: '<green>Reward: <white>{reward}', lore: ['<gray>Money or items awarded', '<gray>to the killer.', '', '<yellow>Click to configure']}
+  cancel: {slot: 18, material: BARRIER, name: '<red>Cancel', lore: ['<gray>Discard this contract.']}
+  continue: {slot: 26, material: LIME_DYE, name: '<green>Continue', lore: ['<gray>Review the assassination contract.']}
+
+creation-assassination-confirm:
+  title: '<dark_gray>Assassination confirmation'
+  size: 27
+  target: {slot: 10, material: PLAYER_HEAD, name: '<red>Target: <white>{target}', lore: ['<gray>The player to assassinate.']}
+  reward: {slot: 12, material: EMERALD, name: '<green>Reward: <white>{reward}', lore: ['<gray>Reward for the killer.']}
+  duration: {slot: 13, material: CLOCK, name: '<yellow>Time: <white>{duration}', lore: ['<gray>Time before the contract expires.']}
+  back: {slot: 15, material: RED_DYE, name: '<red>Back', lore: ['<gray>Return to configuration.']}
+  accept: {slot: 16, material: LIME_DYE, name: '<green>Create contract', lore: ['<gray>Fund and publish this bounty.']}
+  processing: {slot: 16, material: CLOCK, name: '<yellow>Creating contract…'}
+
+# Visual contract editor. Material, amount, money and exact player names are entered through chat.
+creation:
+  title: '<dark_gray>Creation'
+  size: 27
+  material: {slot: 10, name: '<gold>Material: <white>{material}', lore: ['<gray>The item players must deliver.', '', '<yellow>Click and type its material name']}
+  amount: {slot: 11, name: '<gold>Requested amount: <white>{amount}', lore: ['<gray>Exact total requested: <white>{amount}', '', '<yellow>Click and type a quantity']}
+  matching: {slot: 13, material: REDSTONE, name: '<red>Matching: <white>{matching}', lore: ['<gray>MATERIAL: item type only', '<gray>SIMILAR: normal metadata', '<gray>EXACT: all stable item data', '', '<yellow>Left/right-click to change']}
+  duration: {slot: 14, material: CLOCK, name: '<yellow>Time: <white>{duration}', lore: ['<gray>Choose how long the listing lasts.', '', '<yellow>Click to select a time']}
+  reward: {slot: 15, material: EMERALD, name: '<green>Reward: <white>{reward}', lore: ['<gray>Choose money or one or more', '<gray>item stacks as the reward.', '', '<yellow>Click to configure']}
+  visibility: {slot: 16, material: BOOK, name: '<yellow>Visibility: <white>{visibility}', lore: ['<gray>Left-click: public listing', '<gray>Right-click: exact online player name']}
+  cancel: {slot: 18, material: BARRIER, name: '<red>Cancel', lore: ['<gray>Discard this contract.']}
+  continue: {slot: 26, material: LIME_DYE, name: '<green>Continue', lore: ['<gray>Review the configured contract.']}
+
+# Hours are normal clocks. Whole-day choices receive the enchantment glow automatically.
+creation-time:
+  title: '<dark_gray>Contract time'
+  size: 27
+  option-slots: [10, 11, 12, 14, 15, 16]
+  option-name: '<yellow>{duration}'
+  selected-name: '<green>{duration} — SELECTED'
+  option-lore: ['<gray>Duration type: <white>{type}', '', '<yellow>Click to select']
+  cancel: {slot: 18, material: BARRIER, name: '<red>Back', lore: ['<gray>Discard the time change.']}
+  accept: {slot: 26, material: LIME_DYE, name: '<green>Use {duration}', lore: ['<gray>Save this duration.']}
+
+creation-reward:
+  title: '<dark_gray>Reward type'
+  size: 27
+  money: {slot: 11, material: EMERALD, name: '<green>Money', lore: ['<gray>Current reward: <white>{reward}', '', '<yellow>Click and enter the amount in chat']}
+  items: {slot: 15, material: CHEST, name: '<gold>Items', lore: ['<gray>Select one or more item stacks', '<gray>in a protected deposit menu.', '<gray>Selected stacks: <white>{stacks}', '', '<yellow>Click to open the deposit']}
+  back: {slot: 18, material: BARRIER, name: '<red>Back', lore: ['<gray>Return to contract creation.']}
+  accept: {slot: 26, material: LIME_DYE, name: '<green>Continue', lore: ['<gray>Current reward: <white>{reward}']}
+
+creation-reward-items:
+  title: '<dark_gray>Item reward'
+  size: 54
+  back: {slot: 45, material: BARRIER, name: '<red>Back', lore: ['<gray>Return every deposited item', '<gray>and choose another reward.']}
+  accept: {slot: 53, material: LIME_DYE, name: '<green>Save item reward', lore: ['<gray>Normal click and Shift + click', '<gray>are both supported.']}
+
+creation-confirm:
+  title: '<dark_gray>Confirmation'
+  size: 27
+  material: {slot: 10, name: '<gold>Material: <white>{material}', lore: ['<gray>The requested material.']}
+  amount: {slot: 11, name: '<gold>Amount: <white>{amount}', lore: ['<gray>Total items requested: <white>{amount}']}
+  settings: {slot: 13, material: BOOK, name: '<yellow>Other settings', lore: ['<gray>Matching: <white>{matching}', '<gray>Duration: <white>{duration}', '<gray>Reward: <white>{reward}', '<gray>Visibility: <white>{visibility}', '<gray>Fulfillment: <white>{fulfillment}']}
+  accept: {slot: 15, material: LIME_DYE, name: '<green>Create contract', lore: ['<gray>Fund and publish this listing.']}
+  back: {slot: 16, material: RED_DYE, name: '<red>Back', lore: ['<gray>Return to configuration.']}
+  processing: {slot: 15, material: CLOCK, name: '<yellow>Creating contract…'}
+
+# Public listings. Rows 0-44 contain gold-ingot listing icons; row 5 is navigation.
+library:
+  title: '<dark_gray>Library — page {page}'
+  size: 54
+  back: {slot: 45, material: BARRIER, name: '<red>Back', lore: ['<gray>Return to the main menu.']}
+  info: {slot: 49, material: WRITABLE_BOOK, name: '<gold>Public listings', lore: ['<gray>Each icon is the requested item', '<gray>you may help deliver.', '<gray>Click one to see its details.', '', '<white>Page: <yellow>{page}']}
+  navigation: {slot: 53, material: ARROW, name: '<yellow>Navigate pages', lore: ['<gray>Left-click: next page', '<gray>Right-click: previous page', '', '<white>Current page: <yellow>{page}']}
+
+# Each listing uses the requested material as its icon and visually caps its amount at 64.
+listing:
+  contract:
+    material: GOLD_INGOT
+    name: '<gold>Listing #{contract_id} <white>— {material}'
+    lore: ['<gray>Creator: <white>{creator}', '<gray>Progress: <white>{delivered}/{total}', '<gray>Remaining: <white>{remaining}', '<gray>Reward: <white>{reward}', '<gray>Matching: <white>{matching}', '<gray>Status: <white>{status}', '<gray>Expires in: <white>{time_left}', '', '<yellow>Click for details']
+  contribution:
+    material: GOLD_INGOT
+    name: '<gold>Listing #{contract_id} <white>— {material}'
+    lore: ['<gray>You delivered: <white>{amount}', '<gray>Payout (minor units): <white>{payout}', '<gray>Date: <white>{date}', '', '<yellow>Click for details']
+  assassination:
+    material: PLAYER_HEAD
+    name: '<red>Assassination: <white>{target}'
+    lore: ['<gray>Creator: <white>{creator}', '<gray>Reward: <white>{reward}', '<gray>Status: <white>{status}', '<gray>Expires in: <white>{time_left}', '', '<yellow>Click for details']
+  assassination-contribution:
+    material: PLAYER_HEAD
+    name: '<red>Assassinated: <white>{target}'
+    lore: ['<gray>Listing: <white>#{contract_id}', '<gray>Date: <white>{date}', '', '<yellow>Click for details']
+
+search:
+  title: '<dark_gray>Search: {query}'
+  size: 54
+  back: {slot: 49, material: BARRIER, name: '<red>Back', lore: ['<gray>Return to the main menu.']}
+
+mine:
+  title: '<dark_gray>Created listings'
+  size: 54
+  back: {slot: 49, material: BARRIER, name: '<red>Back', lore: ['<gray>Return to your book.']}
+
+contributions:
+  title: '<dark_gray>Participating listings'
+  size: 54
+  back: {slot: 49, material: BARRIER, name: '<red>Back', lore: ['<gray>Return to your book.']}
+
+detail:
+  title: '<dark_gray>Listing {contract_id}'
+  size: 54
+  contract: {slot: 22, name: '<gold>Listing #{contract_id}', lore: ['<gray>Requested: <white>{total} × {material}', '<gray>Delivered: <white>{delivered}', '<gray>Remaining: <white>{remaining}', '<gray>Reward: <white>{reward}', '<gray>Mode: <white>{matching} / {fulfillment}', '<gray>Visibility: <white>{visibility}']}
+  assassination: {slot: 22, material: PLAYER_HEAD, name: '<red>Target: <white>{target}', lore: ['<gray>Assassination contract', '<gray>Reward: <white>{reward}', '<gray>Visibility: <white>PUBLIC']}
+  start: {slot: 31, material: LIME_DYE, name: '<green>Start contract', lore: ['<gray>Join this bounty and make it', '<gray>appear in your active listings.', '', '<yellow>Click to start']}
+  started: {slot: 31, material: LIME_DYE, glow: true, name: '<green>Contract started', lore: ['<gray>You are participating in this bounty.', '<gray>Kill the target before time expires.']}
+  starting: {slot: 31, material: CLOCK, name: '<yellow>Starting contract...'}
+  deliver: {slot: 31, material: HOPPER, name: '<green>Deliver items', lore: ['<gray>Opens a protected deposit.']}
+  cancel: {slot: 40, material: RED_DYE, name: '<red>Cancel listing', lore: ['<gray>Returns unused escrow through Claims.', '', '<yellow>Click once to arm']}
+  cancel-confirm: {slot: 40, material: RED_DYE, glow: true, name: '<red>Confirm cancellation', lore: ['<gray>This immediately closes the listing.', '<gray>Its unused reward remains protected.', '', '<red>Click again to confirm']}
+  cancelling: {slot: 40, material: CLOCK, name: '<yellow>Cancelling safely...'}
+  back: {slot: 49, material: BARRIER, name: '<red>Back'}
+
+claims:
+  title: '<dark_gray>Claims'
+  size: 54
+  entry: {name: '<green>{type}', lore: ['<gray>Listing: <white>#{contract_id}', '<gray>Created: <white>{date}', '<yellow>Click to claim safely']}
+  back: {slot: 49, material: BARRIER, name: '<red>Back', lore: ['<gray>Return to the main menu.']}
+
+delivery:
+  title: '<dark_gray>Deliver to {contract_id}'
+  size: 54
+  confirm: {slot: 53, material: LIME_DYE, name: '<green>Confirm delivery', lore: ['<gray>Normal click and Shift + click', '<gray>are supported in the deposit.']}
+  cancel: {slot: 45, material: BARRIER, name: '<red>Cancel'}
+  processing: {slot: 53, material: CLOCK, name: '<yellow>Processing…'}
+
+sounds:
+  # Sound names use Bukkit enum names. Volume and pitch normally range from 0.0 to 2.0.
+  # Set name to an empty string to silence one action.
+  open: {name: BLOCK_CHEST_OPEN, volume: 0.6, pitch: 1.0}
+  select: {name: UI_BUTTON_CLICK, volume: 0.65, pitch: 1.15}
+  back: {name: UI_BUTTON_CLICK, volume: 0.65, pitch: 0.8}
+  success: {name: ENTITY_PLAYER_LEVELUP, volume: 0.8, pitch: 1.2}
+  error: {name: ENTITY_VILLAGER_NO, volume: 0.7, pitch: 1.0}
+
+locales:
+  # Locale sections override only the text that differs from the base English menus.
+  # Add matching keys here when translating a menu entry.
+  es:
+    hub:
+      title: '<dark_gray>Contratos Dusk'
+      claims: {material: CHEST, name: '<aqua>Reclamaciones', lore: ['<gray>Recoge dinero y objetos', '<gray>que tengas pendientes.', '', '<yellow>Clic para abrir tus reclamaciones']}
+      library: {material: BOOKSHELF, name: '<gold>Listados públicos', lore: ['<gray>Explora recompensas públicas', '<gray>en las que puedes participar.', '', '<yellow>Clic para abrir la librería']}
+      book: {material: BOOK, name: '<yellow>Tus listados', lore: ['<gray>Mira los listados que creaste', '<gray>o en los que participaste.', '', '<yellow>Clic para abrir tu libro']}
+      create: {material: EMERALD, name: '<green>Crear una recompensa', lore: ['<gray>Publica una solicitud nueva', '<gray>y financia su recompensa.', '', '<yellow>Clic para comenzar']}
+    book:
+      title: '<dark_gray>Libro'
+      contributions: {material: WRITTEN_BOOK, name: '<light_purple>Activos', lore: ['<gray>Listados que iniciaste y', '<gray>todavía debes completar.', '', '<yellow>Clic para ver']}
+      mine: {material: KNOWLEDGE_BOOK, name: '<green>Creados', lore: ['<gray>Todos los listados', '<gray>que tú publicaste.', '', '<yellow>Clic para ver']}
+      back: {material: BARRIER, name: '<red>Volver', lore: ['<gray>Regresa al menú principal.']}
+    creation-type:
+      title: '<dark_gray>Tipo de contrato'
+      assassination: {material: DIAMOND_SWORD, name: '<red>Asesinato', lore: ['<gray>Pon una recompensa sobre', '<gray>la cabeza de un jugador.', '', '<yellow>Clic para crear']}
+      delivery: {material: GRASS_BLOCK, name: '<green>Entrega de objetos', lore: ['<gray>Solicita un material y cantidad', '<gray>a otro jugador.', '', '<yellow>Clic para crear']}
+      cancel: {material: BARRIER, name: '<red>Cancelar', lore: ['<gray>Regresa al menú anterior.']}
+    creation-assassination:
+      title: '<dark_gray>Contrato de asesinato'
+      target: {material: PLAYER_HEAD, name: '<red>Objetivo: <white>{target}', lore: ['<gray>El jugador que deben asesinar.', '', '<yellow>Clic y escribe su nick en el chat']}
+      duration: {material: CLOCK, name: '<yellow>Tiempo: <white>{duration}', lore: ['<gray>Elige cuánto durará la recompensa.', '', '<yellow>Clic para seleccionar']}
+      reward: {material: EMERALD, name: '<green>Recompensa: <white>{reward}', lore: ['<gray>Dinero u objetos entregados', '<gray>al asesino.', '', '<yellow>Clic para configurar']}
+      cancel: {material: BARRIER, name: '<red>Cancelar', lore: ['<gray>Descarta este contrato.']}
+      continue: {material: LIME_DYE, name: '<green>Continuar', lore: ['<gray>Revisa el contrato de asesinato.']}
+    creation-assassination-confirm:
+      title: '<dark_gray>Confirmación de asesinato'
+      target: {material: PLAYER_HEAD, name: '<red>Objetivo: <white>{target}', lore: ['<gray>El jugador que deben asesinar.']}
+      reward: {material: EMERALD, name: '<green>Recompensa: <white>{reward}', lore: ['<gray>Recompensa para el asesino.']}
+      duration: {material: CLOCK, name: '<yellow>Tiempo: <white>{duration}', lore: ['<gray>Tiempo antes de que expire.']}
+      back: {material: RED_DYE, name: '<red>Volver', lore: ['<gray>Regresa a la configuración.']}
+      accept: {material: LIME_DYE, name: '<green>Crear contrato', lore: ['<gray>Financia y publica esta recompensa.']}
+      processing: {material: CLOCK, name: '<yellow>Creando contrato…'}
+    creation:
+      title: '<dark_gray>Creación'
+      material: {name: '<gold>Material: <white>{material}', lore: ['<gray>El objeto que deben entregar.', '', '<yellow>Clic y escribe el material en el chat']}
+      amount: {name: '<gold>Cantidad solicitada: <white>{amount}', lore: ['<gray>Total exacto solicitado: <white>{amount}', '', '<yellow>Clic y escribe una cantidad']}
+      matching: {material: REDSTONE, name: '<red>Comparación: <white>{matching}', lore: ['<gray>MATERIAL: solo el tipo', '<gray>SIMILAR: metadatos normales', '<gray>EXACT: todos los datos estables', '', '<yellow>Clic izquierdo/derecho para cambiar']}
+      duration: {material: CLOCK, name: '<yellow>Tiempo: <white>{duration}', lore: ['<gray>Elige cuánto durará el listado.', '', '<yellow>Clic para seleccionar el tiempo']}
+      reward: {material: EMERALD, name: '<green>Recompensa: <white>{reward}', lore: ['<gray>Elige dinero o una o más', '<gray>pilas de objetos como recompensa.', '', '<yellow>Clic para configurar']}
+      visibility: {material: BOOK, name: '<yellow>Visibilidad: <white>{visibility}', lore: ['<gray>Clic izquierdo: listado público', '<gray>Clic derecho: nombre exacto conectado']}
+      cancel: {material: BARRIER, name: '<red>Cancelar', lore: ['<gray>Descarta este contrato.']}
+      continue: {material: LIME_DYE, name: '<green>Continuar', lore: ['<gray>Revisa el contrato configurado.']}
+    creation-time:
+      title: '<dark_gray>Tiempo de contrato'
+      option-name: '<yellow>{duration}'
+      selected-name: '<green>{duration} — SELECCIONADO'
+      option-lore: ['<gray>Tipo de duración: <white>{type}', '', '<yellow>Clic para seleccionar']
+      cancel: {material: BARRIER, name: '<red>Volver', lore: ['<gray>Descarta el cambio de tiempo.']}
+      accept: {material: LIME_DYE, name: '<green>Usar {duration}', lore: ['<gray>Guarda esta duración.']}
+    creation-reward:
+      title: '<dark_gray>Tipo de recompensa'
+      money: {material: EMERALD, name: '<green>Dinero', lore: ['<gray>Recompensa actual: <white>{reward}', '', '<yellow>Clic y escribe la cantidad en el chat']}
+      items: {material: CHEST, name: '<gold>Objetos', lore: ['<gray>Selecciona una o más pilas', '<gray>en un depósito protegido.', '<gray>Pilas seleccionadas: <white>{stacks}', '', '<yellow>Clic para abrir el depósito']}
+      back: {material: BARRIER, name: '<red>Volver', lore: ['<gray>Regresa a la creación del contrato.']}
+      accept: {material: LIME_DYE, name: '<green>Continuar', lore: ['<gray>Recompensa actual: <white>{reward}']}
+    creation-reward-items:
+      title: '<dark_gray>Recompensa de objetos'
+      back: {material: BARRIER, name: '<red>Volver', lore: ['<gray>Devuelve todos los objetos', '<gray>y elige otra recompensa.']}
+      accept: {material: LIME_DYE, name: '<green>Guardar recompensa', lore: ['<gray>Admite clic normal', '<gray>y Shift + clic.']}
+    creation-confirm:
+      title: '<dark_gray>Confirmación'
+      material: {name: '<gold>Material: <white>{material}', lore: ['<gray>El material solicitado.']}
+      amount: {name: '<gold>Cantidad: <white>{amount}', lore: ['<gray>Total de objetos solicitados: <white>{amount}']}
+      settings: {material: BOOK, name: '<yellow>Demás configuraciones', lore: ['<gray>Comparación: <white>{matching}', '<gray>Duración: <white>{duration}', '<gray>Recompensa: <white>{reward}', '<gray>Visibilidad: <white>{visibility}', '<gray>Cumplimiento: <white>{fulfillment}']}
+      accept: {material: LIME_DYE, name: '<green>Crear contrato', lore: ['<gray>Financia y publica este listado.']}
+      back: {material: RED_DYE, name: '<red>Volver', lore: ['<gray>Regresa a la configuración.']}
+      processing: {material: CLOCK, name: '<yellow>Creando contrato…'}
+    library:
+      title: '<dark_gray>Librería — página {page}'
+      back: {material: BARRIER, name: '<red>Volver', lore: ['<gray>Regresa al menú principal.']}
+      info: {material: WRITABLE_BOOK, name: '<gold>Listados públicos', lore: ['<gray>Cada icono es el objeto solicitado', '<gray>que puedes ayudar a entregar.', '<gray>Haz clic para ver sus detalles.', '', '<white>Página: <yellow>{page}']}
+      navigation: {material: ARROW, name: '<yellow>Navegar páginas', lore: ['<gray>Clic izquierdo: página siguiente', '<gray>Clic derecho: página anterior', '', '<white>Página actual: <yellow>{page}']}
+    listing:
+      contract:
+        material: GOLD_INGOT
+        name: '<gold>Listado #{contract_id} <white>— {material}'
+        lore: ['<gray>Creador: <white>{creator}', '<gray>Progreso: <white>{delivered}/{total}', '<gray>Restante: <white>{remaining}', '<gray>Recompensa: <white>{reward}', '<gray>Comparación: <white>{matching}', '<gray>Estado: <white>{status}', '<gray>Vence en: <white>{time_left}', '', '<yellow>Clic para ver detalles']
+      contribution:
+        material: GOLD_INGOT
+        name: '<gold>Listado #{contract_id} <white>— {material}'
+        lore: ['<gray>Entregaste: <white>{amount}', '<gray>Pago (unidades menores): <white>{payout}', '<gray>Fecha: <white>{date}', '', '<yellow>Clic para ver detalles']
+      assassination:
+        material: PLAYER_HEAD
+        name: '<red>Asesinato: <white>{target}'
+        lore: ['<gray>Creador: <white>{creator}', '<gray>Recompensa: <white>{reward}', '<gray>Estado: <white>{status}', '<gray>Vence en: <white>{time_left}', '', '<yellow>Clic para ver detalles']
+      assassination-contribution:
+        material: PLAYER_HEAD
+        name: '<red>Asesinaste a: <white>{target}'
+        lore: ['<gray>Listado: <white>#{contract_id}', '<gray>Fecha: <white>{date}', '', '<yellow>Clic para ver detalles']
+    search:
+      title: '<dark_gray>Búsqueda: {query}'
+      back: {material: BARRIER, name: '<red>Volver', lore: ['<gray>Regresa al menú principal.']}
+    mine:
+      title: '<dark_gray>Listados creados'
+      back: {material: BARRIER, name: '<red>Volver', lore: ['<gray>Regresa a tu libro.']}
+    contributions:
+      title: '<dark_gray>Listados en participación'
+      back: {material: BARRIER, name: '<red>Volver', lore: ['<gray>Regresa a tu libro.']}
+    detail:
+      title: '<dark_gray>Listado {contract_id}'
+      contract: {name: '<gold>Listado #{contract_id}', lore: ['<gray>Solicitado: <white>{total} × {material}', '<gray>Entregado: <white>{delivered}', '<gray>Restante: <white>{remaining}', '<gray>Recompensa: <white>{reward}', '<gray>Modo: <white>{matching} / {fulfillment}', '<gray>Visibilidad: <white>{visibility}']}
+      assassination: {material: PLAYER_HEAD, name: '<red>Objetivo: <white>{target}', lore: ['<gray>Contrato de asesinato', '<gray>Recompensa: <white>{reward}', '<gray>Visibilidad: <white>PÚBLICA']}
+      start: {material: LIME_DYE, name: '<green>Iniciar contrato', lore: ['<gray>Únete a esta recompensa y haz que', '<gray>aparezca en tus listados activos.', '', '<yellow>Clic para iniciar']}
+      started: {material: LIME_DYE, glow: true, name: '<green>Contrato iniciado', lore: ['<gray>Estás participando en esta recompensa.', '<gray>Mata al objetivo antes de que expire.']}
+      starting: {material: CLOCK, name: '<yellow>Iniciando contrato...'}
+      deliver: {material: HOPPER, name: '<green>Entregar objetos', lore: ['<gray>Abre un depósito protegido.']}
+      cancel: {material: RED_DYE, name: '<red>Cancelar listado', lore: ['<gray>Devuelve el escrow sin usar mediante Reclamaciones.', '', '<yellow>Clic una vez para preparar']}
+      cancel-confirm: {material: RED_DYE, glow: true, name: '<red>Confirmar cancelación', lore: ['<gray>Esto cerrará el listado inmediatamente.', '<gray>La recompensa sin usar seguirá protegida.', '', '<red>Clic otra vez para confirmar']}
+      cancelling: {material: CLOCK, name: '<yellow>Cancelando de forma segura...'}
+      back: {material: BARRIER, name: '<red>Volver'}
+    claims:
+      title: '<dark_gray>Reclamaciones'
+      entry: {name: '<green>{type}', lore: ['<gray>Listado: <white>#{contract_id}', '<gray>Creada: <white>{date}', '<yellow>Clic para reclamar de forma segura']}
+      back: {material: BARRIER, name: '<red>Volver', lore: ['<gray>Regresa al menú principal.']}
+    delivery:
+      title: '<dark_gray>Entrega a {contract_id}'
+      confirm: {material: LIME_DYE, name: '<green>Confirmar entrega', lore: ['<gray>El depósito admite clic normal', '<gray>y Shift + clic.']}
+      cancel: {material: BARRIER, name: '<red>Cancelar'}
+      processing: {material: CLOCK, name: '<yellow>Procesando…'}
